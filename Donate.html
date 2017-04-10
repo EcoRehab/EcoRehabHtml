@@ -1,0 +1,62 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
+
+<div ng-app="myDonate">
+<div ng-controller="donatepagecontroller as dpc" >
+<h1>This is a test page by yliu12</h1>
+<input id ="category"  autocomplete="off" type="text" ng-model="amount" placeholder="this is a placeholder" />
+
+<div ng-init = "selectedCate = donateCategorys[0]" class = "amountSelect" >
+<ul>
+<li ng-class="{active: category==selectedCate}" ng-repeat = "category in donateCategorys">
+<a ng-click = "donateCateOnClick(category)">{{category}}</a>
+</li>
+</ul>
+</div>
+<button ng-click = "donateBtnOnClick()">Donate</button>
+<p>You want to Donate $ <span ng-bind ="selectedCate" ></span></p>
+</div>
+
+<style>
+.amountSelect{
+font-family: 'Montserrat', Arial, sans-serif;
+}
+.amountSelect ul{  
+-webkit-margin-before: 1em;
+-webkit-margin-after: 1em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+padding-left: 0;
+}  
+.amountSelect ul li{  
+list-style-type:none;  
+display: -webkit-inline-box;
+margin: 0 0.8em 0 0;
+}  
+.amountSelect a{
+border-bottom: none;
+cursor: pointer;
+padding: 0.5em 1em 0.5em 1em;
+}
+.amountSelect .active > a {
+border-bottom: 2px solid;
+background: #000;
+color: #fff;
+}
+</style>
+
+<script>
+	var app = angular.module("myDonate", []); 
+app.controller("donatepagecontroller", function ($scope) {
+	$scope.donateCategorys = [50,75,100,250,"Other"];  
+  $scope.donateBtnOnClick = function () {
+        debugger;
+      	//window.open("https://www.paypal.com/us/home");
+	};  
+	 $scope.donateCateOnClick = function (category){
+       debugger;
+       $scope.selectedCate = category;
+     };     
+});		
+</script>
+	
