@@ -45,23 +45,18 @@ color: #fff;
 }
 </style>
 
-	<script>
+<script>
 	var app = angular.module("myDonate", []); 
 app.controller("donatepagecontroller", function ($scope) {
-	$scope.donateCategorys = [50,75,100,250,"Other"];
-  
-  
+	$scope.donateCategorys = [50,75,100,250,"Other"];  
   $scope.donateBtnOnClick = function () {
         debugger;
       	//window.open("https://www.paypal.com/us/home");
-	};
-  
+	};  
 	 $scope.donateCateOnClick = function (category){
        debugger;
        $scope.selectedCate = category;
-     };
-     
-});
-		
-		</script>
+     };     
+});		
+</script>
 	
