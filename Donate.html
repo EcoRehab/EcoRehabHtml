@@ -1,22 +1,25 @@
+<!-- Webpage Body Starts Here -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
-
 <div ng-app="myDonate">
 <div ng-controller="donatepagecontroller as dpc" >
 <h1>This is a test page by yliu12</h1>
-<input id ="category"  autocomplete="off" type="text" ng-model="amount" placeholder="this is a placeholder" />
-
 <div ng-init = "selectedCate = donateCategorys[0]" class = "amountSelect" >
 <ul>
 <li ng-class="{active: category==selectedCate}" ng-repeat = "category in donateCategorys">
 <a ng-click = "donateCateOnClick(category)">{{category}}</a>
 </li>
+:
+<li>
+<input id ="category"  autocomplete="off" type="text" ng-model="otherAmount" placeholder="Amount" />
+</li>
 </ul>
 </div>
 <button ng-click = "donateBtnOnClick()">Donate</button>
-<p>You want to Donate $ <span ng-bind ="selectedCate" ></span></p>
+<p>You want to Donate $ <span ng-bind ="selectedCate == 'Other'? otherAmount:selectedCate" ></span></p>
 </div>
-
+<div>	
+<!--CSS here-->	
 <style>
 .amountSelect{
 font-family: 'Montserrat', Arial, sans-serif;
@@ -28,6 +31,7 @@ font-family: 'Montserrat', Arial, sans-serif;
 -webkit-margin-end: 0px;
 padding-left: 0;
 }  
+
 .amountSelect ul li{  
 list-style-type:none;  
 display: -webkit-inline-box;
@@ -39,12 +43,11 @@ cursor: pointer;
 padding: 0.5em 1em 0.5em 1em;
 }
 .amountSelect .active > a {
-border-bottom: 2px solid;
 background: #000;
 color: #fff;
 }
 </style>
-
+<!--JS here -->
 <script>
 	var app = angular.module("myDonate", []); 
 app.controller("donatepagecontroller", function ($scope) {
