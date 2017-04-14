@@ -24,7 +24,7 @@ Meet Norma. She moved from a mobile home into her “dream house,” an inviting
 </br></br>	
 <h2>How would you like to donate?</h2>
 </br>
-<div ng-init = "selectedCate = donateCategorys[0]" class = "amountSelect" >
+<div ng-init = "selectedCate = donateCategorys[0];donateAmount = selectedCate" class = "amountSelect" >
 <ul>
 <li ng-class="{active: category==selectedCate}" ng-repeat = "category in donateCategorys">
 <a ng-click = "donateCateOnClick(category)">{{category}}</a>
@@ -38,10 +38,28 @@ Meet Norma. She moved from a mobile home into her “dream house,” an inviting
 
 
 <button ng-click = "donateBtnOnClick()">Donate</button>
+<!--Papal Donate button-->
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_donations">
+<input type="hidden" name="business" value="ZQJG82BUD6H62">
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="item_name" value="EcoRehabAgain">
+<input type="hidden" name="no_note" value="0">
+<input type="hidden" name="cn" value="Add special instructions to the seller:">
+<input type="hidden" name="no_shipping" value="2">
+<input type="hidden" name="rm" value="1">
+<input type="hidden" name="return" value="http://localhost:8000/paypal-success">
+<input type="hidden" name="cancel_return" value="http://localhost:8000/paypal-failure">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHosted">
+<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
 
 
 
-<p>You want to Donate $ <span ng-bind ="selectedCate == 'Other'? otherAmount:selectedCate" ></span></p>
+<p>You want to Donate $ <span ng-bind ="donateAmount" ></span></p>
 
 
 </div>
@@ -86,7 +104,7 @@ app.controller("donatepagecontroller", function ($scope) {
 	 $scope.donateCateOnClick = function (category){
        debugger;
        $scope.selectedCate = category;
-		 $scope. donateAmount = selectedCate == 'Other'? otherAmount:selectedCate;
+		 $scope.donateAmount = category == 'Other'? $scope.otherAmount:category;
      };     
 });		
 </script>
