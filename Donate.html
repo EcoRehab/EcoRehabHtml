@@ -1,9 +1,29 @@
+<!--  Call to Action  -->
+
+&nbsp;
+<h3><span style="text-decoration: underline;"><strong>Help us build community, one house at a time.</strong></span></h3>
+Every gift matters as we work together to improve the quality of life in our community, so please give what you can, when you can.
+
+</br>
+</br>
+<!--  Human-Interest Story  -->
+<h3><span style="text-decoration: underline;"> Meet Norma</span></h3>
+She moved from a mobile home into her first home, a property ecoREHAB rehabilitated for this retired school teacher.
+
+Meet Norma. She moved from a mobile home into her “dream house,” an inviting, efficient home ecoREHAB transformed from an abandoned lot.
+
+“My neighbors have seen this investment, and it has encouraged us all to be the change in our community, and to create a sense of belonging. Our light must shine out the darkness.”
+
+
+</br>
 <!-- Webpage Body Starts Here -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 <div ng-app="myDonate">
 <div ng-controller="donatepagecontroller as dpc" >
-<h1>This is a test page by yliu12</h1>
+</br></br>	
+<h2>How would you like to donate?</h2>
+</br>
 <div ng-init = "selectedCate = donateCategorys[0]" class = "amountSelect" >
 <ul>
 <li ng-class="{active: category==selectedCate}" ng-repeat = "category in donateCategorys">
@@ -15,8 +35,15 @@
 </li>
 </ul>
 </div>
+
+
 <button ng-click = "donateBtnOnClick()">Donate</button>
+
+
+
 <p>You want to Donate $ <span ng-bind ="selectedCate == 'Other'? otherAmount:selectedCate" ></span></p>
+
+
 </div>
 <div>	
 <!--CSS here-->	
@@ -35,7 +62,7 @@ padding-left: 0;
 .amountSelect ul li{  
 list-style-type:none;  
 display: -webkit-inline-box;
-margin: 0 0.8em 0 0;
+margin: 0 0 0 0.8em;
 }  
 .amountSelect a{
 border-bottom: none;
@@ -59,6 +86,7 @@ app.controller("donatepagecontroller", function ($scope) {
 	 $scope.donateCateOnClick = function (category){
        debugger;
        $scope.selectedCate = category;
+		 $scope. donateAmount = selectedCate == 'Other'? otherAmount:selectedCate;
      };     
 });		
 </script>
