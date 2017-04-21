@@ -40,8 +40,10 @@ Meet Norma. She moved from a mobile home into her “dream house,” an inviting
 <!--<button ng-click = "donateBtnOnClick()">Donate</button>-->
 <!--Papal Donate button-->
 
+
 <div   ng-disabled="donateAmount<1">
 <span ng-if = "donateAmount<1" id ="disableCover" ></span>
+
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_donations">
 <input type="hidden" name="business" value="V54AFM4HRNC9E">
@@ -64,8 +66,6 @@ Meet Norma. She moved from a mobile home into her “dream house,” an inviting
 
 <p>You want to Donate $ <span ng-bind ="donateAmount" ></span></p>
 
-
-</div>
 <div>	
 <!--CSS here-->	
 <style>
@@ -110,7 +110,6 @@ color: #fff;
 	var app = angular.module("myDonate", []); 
 app.controller("donatepagecontroller", function ($scope) {
 	$scope.donateCategorys = [50,75,100,250,"Other"];  
- 
 	
 
 	$scope.onOtherAmountinputChange = function (category) {
