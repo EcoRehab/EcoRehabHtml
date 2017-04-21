@@ -40,24 +40,27 @@ Meet Norma. She moved from a mobile home into her “dream house,” an inviting
 <!--<button ng-click = "donateBtnOnClick()">Donate</button>-->
 <!--Papal Donate button-->
 
-    <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-        <input type="hidden" name="cmd" value="_donations">
-        <input type="hidden" name="business" value="ZQJG82BUD6H62">
-        <input type="hidden" name="lc" value="US">
-        <input type="hidden" name="amount" value="{{donateAmount}}">
-        <input type="hidden" name="currency_code" value="USD">
-        <input type="hidden" name="no_note" value="0">
-        <input type="hidden" name="cn" value="Add special instructions to the seller:">
-        <input type="hidden" name="no_shipping" value="2">
-        <input type="hidden" name="rm" value="1">
-        <input type="hidden" name="return" value="http://localhost:8000/paypal-success"><!--success page to be changed-->
-        <input type="hidden" name="cancel_return" value="http://localhost:8000/paypal-failure"><!--failure page to be changed-->
-        <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHosted">
-        <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!" >
-        <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-    </form>
+<div   ng-disabled="donateAmount<1">
+<span ng-if = "donateAmount<1" id ="disableCover" ></span>
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+<input type="hidden" name="cmd" value="_donations">
+<input type="hidden" name="business" value="V54AFM4HRNC9E">
+<input type="hidden" name="lc" value="US">
+<input type="hidden" name="item_name" value="ecoREHAB of Muncie, Inc">
+<input type="hidden" name="amount" value="{{donateAmount}}">
+<input type="hidden" name="currency_code" value="USD">
+<input type="hidden" name="no_note" value="0">
+<input type="hidden" name="cn" value="Add special instructions to the seller:">
+<input type="hidden" name="no_shipping" value="1">
+<input type="hidden" name="rm" value="1">
+<input type="hidden" name="return" value="https://loveandtruthiness.wordpress.com/donate-success">
+<input type="hidden" name="cancel_return" value="https://loveandtruthiness.wordpress.com/donate-cancel">
+<input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHosted">
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+</form>
 
-
+</div>
 
 <p>You want to Donate $ <span ng-bind ="donateAmount" ></span></p>
 
@@ -76,7 +79,6 @@ font-family: 'Montserrat', Arial, sans-serif;
 -webkit-margin-end: 0px;
 padding-left: 0;
 }  
-
 .amountSelect ul li{  
 list-style-type:none;  
 display: -webkit-inline-box;
@@ -91,22 +93,26 @@ padding: 0.5em 1em 0.5em 1em;
 background: #000;
 color: #fff;
 }
+#disableCover {
+    display: block;
+    z-index: 9999;
+    opacity: .1;
+    cursor: not-allowed;
+    position: absolute;
+    width: 147px;
+    height: 47px;
+}
+}	
+	
 </style>
 <!--JS here -->
 <script>
 	var app = angular.module("myDonate", []); 
 app.controller("donatepagecontroller", function ($scope) {
 	$scope.donateCategorys = [50,75,100,250,"Other"];  
-  $scope.donateBtnOnClick = function () {
-        debugger;
-      	//window.open("https://www.paypal.com/us/home");
-	};  
+ 
 	
-	$scope.donateBtnOnClick = function () {
-        debugger;
-      	//window.open("https://www.paypal.com/us/home");
-	};  
-	
+
 	$scope.onOtherAmountinputChange = function (category) {
         debugger;
       	$scope.donateAmount = category == 'Other'? $scope.otherAmount:category;
@@ -119,4 +125,3 @@ app.controller("donatepagecontroller", function ($scope) {
      };     
 });		
 </script>
-	
