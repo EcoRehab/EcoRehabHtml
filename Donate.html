@@ -16,7 +16,9 @@ Meet Norma. She moved from a mobile home into her “dream house,” an inviting
 
 
 </br>
-<!-- Webpage Body Starts Here -->
+
+
+<!-- donate Body Starts Here -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.7/angular.min.js"></script>
 <div ng-app="myDonate">
@@ -24,9 +26,9 @@ Meet Norma. She moved from a mobile home into her “dream house,” an inviting
 </br></br>	
 <h2>How would you like to donate?</h2>
 </br>
-<div ng-init = "selectedCate = donateCategorys[0];donateAmount = selectedCate" class = "amountSelect" >
+<div ng-init = "donateProceed = true; selectedCate = donateCategories[0];donateAmount = selectedCate" class = "amountSelect" >
 <ul>
-<li ng-class="{active: category==selectedCate}" ng-repeat = "category in donateCategorys">
+<li ng-class="{active: category==selectedCate}" ng-repeat = "category in donateCategories">
 <a ng-click = "donateCateOnClick(category)">{{category}}</a>
 </li>
 :
@@ -36,10 +38,16 @@ Meet Norma. She moved from a mobile home into her “dream house,” an inviting
 </ul>
 </div>
 
+</br>
+<small ng-if = "!donateProceed" style="color : red">The minimum dontation amount we accept is $1 due to the processing fees </small>
+</br>
 
-<!--<button ng-click = "donateBtnOnClick()">Donate</button>-->
-<!--Papal Donate button-->
 
+
+<!-- paypal button starts -->
+<div>
+<!-- disable cover -->	
+<span ng-if = "!donateProceed" id ="disableCover" ></span>
 <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 <input type="hidden" name="cmd" value="_donations">
 <input type="hidden" name="business" value="V54AFM4HRNC9E">
@@ -57,13 +65,14 @@ Meet Norma. She moved from a mobile home into her “dream house,” an inviting
 <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
-
-
-<p>You want to Donate $ <span ng-bind ="donateAmount" ></span></p>
-
-
 </div>
-<div>	
+<!-- paypal button ends -->
+
+
+<!--for test only <p>You want to Donate $ <span ng-bind ="donateAmount" ></span></p>-->
+
+<div>
+	
 <!--CSS here-->	
 <style>
 .amountSelect{
@@ -76,7 +85,6 @@ font-family: 'Montserrat', Arial, sans-serif;
 -webkit-margin-end: 0px;
 padding-left: 0;
 }  
-
 .amountSelect ul li{  
 list-style-type:none;  
 display: -webkit-inline-box;
@@ -91,33 +99,45 @@ padding: 0.5em 1em 0.5em 1em;
 background: #000;
 color: #fff;
 }
+#disableCover {
+    display: block;
+    z-index: 9999;
+    opacity: .1;
+    cursor: not-allowed;
+    position: absolute;
+    width: 147px;
+    height: 47px;
+}
+}	
+	
 </style>
+	
 <!--JS here -->
 <script>
 	var app = angular.module("myDonate", []); 
 app.controller("donatepagecontroller", function ($scope) {
-	$scope.donateCategorys = [50,75,100,250,"Other"];  
-  $scope.donateBtnOnClick = function () {
-        debugger;
-      	//window.open("https://www.paypal.com/us/home");
-        
-	};  
-	
-	$scope.donateBtnOnClick = function () {
-        debugger;
-      	//window.open("https://www.paypal.com/us/home");
-	};  
-	
+	$scope.donateCategories = [50,75,100,250,"Other"];  //Set the categories here, donot change "other".
+	$scope.donateMinimum = 1;  //set minimum here.
+
 	$scope.onOtherAmountinputChange = function (category) {
         debugger;
+		if(isNaN($scope.otherAmount)){
+			$scope.donateProceed = false;
+			return;
+		}
+
       	$scope.donateAmount = category == 'Other'? $scope.otherAmount:category;
+		
+		if($scope.donateAmount<$scope.donateMinimum){
+			$scope.donateProceed = false;
+		}
 	};  
 	
 	 $scope.donateCateOnClick = function (category){
        debugger;
        $scope.selectedCate = category;
 		 $scope.donateAmount = category == 'Other'? $scope.otherAmount:category;
+		 $scope.donateProceed = true;
      };     
 });		
 </script>
-	
